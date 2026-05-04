@@ -1,0 +1,242 @@
+/* Import Google Font for Arabic Typography */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+
+/* --- CSS Variables for Easy Theming (Light & Dark Mode) --- */
+:root {
+    --primary-color: #1b4b36; /* Saudi Dark Green */
+    --primary-hover: #143828;
+    --bg-color: #f4f7f6;
+    --surface-color: #ffffff;
+    --text-color: #333333;
+    --text-muted: #666666;
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+body.night {
+    --primary-color: #113324; /* Darker green for night header */
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --border-color: #333333;
+    --shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* --- Global Styles --- */
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    direction: rtl; /* Ensure right-to-left layout for Arabic */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main, .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- Navigation & Header --- */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav li {
+    display: inline;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+nav a:hover {
+    opacity: 0.8;
+}
+
+/* --- Buttons --- */
+button, .btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--primary-hover);
+}
+
+button:active, .btn:active {
+    transform: scale(0.98);
+}
+
+/* --- Home Page Hero & Cards --- */
+#intro, .hero-section {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+/* --- Gallery Grid Layout --- */
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.region {
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.region:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.region img, .place img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.region h3 {
+    margin: 15px;
+    color: var(--text-color);
+}
+
+.region p {
+    margin: 0 15px 15px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.region a {
+    display: block;
+    margin: 15px;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- Search / Filter Input --- */
+#filter, input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 16px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+#filter:focus, input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(27, 75, 54, 0.2);
+}
+
+/* --- Admin Dashboard Tables --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: right;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: rgba(27, 75, 54, 0.05);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+body.night th {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+}
+
+/* --- Details Page Layout --- */
+.place {
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+/* --- Login Form --- */
+form {
+    background-color: var(--surface-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    margin: 40px auto;
+    border: 1px solid var(--border-color);
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}

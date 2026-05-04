@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض المناطق</title>
+    <link rel="stylesheet" href="prostyle.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.php">الرئيسية</a></li>
+                <li><a href="regions.php">معرض المناطق</a></li>
+                <li><a href="details.php">التفاصيل</a></li>
+            </ul>
+            <button id="nightModeBtn">الوضع الليلي</button>
+        </nav>
+    </header>
+    <main>
+        <h1>معرض المناطق</h1>
+        <input type="text" id="filter" placeholder="ابحث عن منطقة...">
+        <div id="gallery">
+            <?php
+            include 'db.php';
+            $sql = "SELECT * FROM regions";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<div class='region' data-name='" . $row["name"] . "' >";
+                    echo "<img src='images/" . $row["image"] . "' alt='" . $row["name"] . "'>";
+                    echo "<h3>" . $row["name"] . "</h3>";
+                    echo "<a href='details.php?region_id=" . $row["id"] . "'>عرض التفاصيل</a>";
+                    echo "</div>";
+                }
+            } else {
+                echo "لا توجد مناطق";
+            }
+            $conn->close();
+            ?>
+        </div>
+        <footer>
+            <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
+        </footer>
+    </main>
+    <script src="scripts.js"></script>
+    <script>
+        document.getElementById('filter').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const regions = document.querySelectorAll('.region');
+            regions.forEach(region => {
+                const name = region.getAttribute('data-name').toLowerCase();
+                if (name.includes(filter)) {
+                    region.style.display = 'block';
+                } else {
+                    region.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
