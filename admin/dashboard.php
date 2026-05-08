@@ -18,23 +18,20 @@ include '../db.php';
     <header>
         <nav>
             <a href="add.php">إضافة محتوى</a>
-            <button id="nightModeBtn">الوضع الليلي</button>
             <a href="logout.php">خروج</a>
         </nav>
     </header>
     <main>
         <h1>لوحة التحكم</h1>
-     <?php
-    // التحقق من وجود رسالة في الجلسة (تم ضبطها في add/update/delete.php)
-    if (isset($_SESSION['message'])) {
-        echo '<div class="alert-popup">
-                <span>' . htmlspecialchars($_SESSION['message']) . '</span>
-                <span class="alert-close">&times;</span>
-              </div>';
-        // حذف الرسالة لكي لا تظهر مرة أخرى عند التحديث
-        unset($_SESSION['message']);
-    }
-    ?>
+        <?php
+        if (isset($_SESSION['message'])) {
+            echo '<div class="alert-popup">
+                    <span>' . htmlspecialchars($_SESSION['message']) . '</span>
+                    <span class="alert-close">&times;</span>
+                  </div>';
+            unset($_SESSION['message']);
+        }
+        ?>
         <h2>المناطق</h2>
         <table>
             <tr>
@@ -43,19 +40,26 @@ include '../db.php';
                 <th>الإجراءات</th>
             </tr>
             <?php
-            $sql = "SELECT * FROM regions";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
-                    echo "<td>" . htmlspecialchars($row["description"]) . "</td>";
-                    echo "<td><a href='update.php?id=" . $row["id"] . "&type=region'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=region' onclick='return confirm(\"هل أنت متأكد من الحذف؟\")'>حذف</a></td>";
-                    echo "</tr>";
+            try {
+                $stmt = $conn->query("SELECT * FROM regions");
+                $regions = $stmt->fetchAll();
+                if (count($regions) > 0) {
+                    foreach($regions as $row) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["description"]) . "</td>";
+                        echo "<td><a href='update.php?id=" . $row["id"] . "&type=region'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=region' onclick='return confirm(\"هل أنت متأكد؟\")'>حذف</a></td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='3'>لا توجد مناطق مضافة</td></tr>";
                 }
+            } catch (PDOException $e) {
+                echo "<tr><td colspan='3'>خطأ في جلب البيانات</td></tr>";
             }
             ?>
         </table>
+        
         <h2>الأماكن</h2>
         <table>
             <tr>
@@ -65,25 +69,29 @@ include '../db.php';
                 <th>الإجراءات</th>
             </tr>
             <?php
-            $sql = "SELECT places.*, regions.name as region_name FROM places JOIN regions ON places.region_id = regions.id";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
-                    echo "<td>" . htmlspecialchars($row["region_name"]) . "</td>";
-                    echo "<td>" . htmlspecialchars($row["description"]) . "</td>";
-                    echo "<td><a href='update.php?id=" . $row["id"] . "&type=place'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=place' onclick='return confirm(\"هل أنت متأكد من الحذف؟\")'>حذف</a></td>";
-                    echo "</tr>";
+            try {
+                $stmt = $conn->query("SELECT places.*, regions.name as region_name FROM places JOIN regions ON places.region_id = regions.id");
+                $places = $stmt->fetchAll();
+                if (count($places) > 0) {
+                    foreach($places as $row) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["region_name"]) . "</td>";
+                        echo "<td>" . htmlspecialchars($row["description"]) . "</td>";
+                        echo "<td><a href='update.php?id=" . $row["id"] . "&type=place'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=place' onclick='return confirm(\"هل أنت متأكد؟\")'>حذف</a></td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>لا توجد أماكن مضافة</td></tr>";
                 }
-            }
+            } catch (PDOException $e) {}
             ?>
         </table>
-        <footer>
-            <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
-        </footer>
     </main>
+    <footer>
+        <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
+    </footer>
     <script src="../scripts.js"></script>
 </body>
 </html>
-<?php $conn->close(); ?>
+<?php $conn = null; ?>
