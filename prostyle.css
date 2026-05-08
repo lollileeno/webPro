@@ -240,3 +240,46 @@ form label {
     margin-bottom: 8px;
     display: block;
 }
+
+/* الصورة الرئيسية في الأعلى: نحدد لها ارتفاعاً لكي لا تكون ضخمة */
+
+
+/* حاوية الأماكن بنظام Flexbox */
+.places-list {
+    display: flex;
+    flex-direction: column; /* الترتيب تحت بعض */
+    gap: 30px;
+    max-width: 900px; /* جعلها داخل حاوية محددة العرض */
+    margin: 0 auto; /* توسيط الحاوية */
+    padding: 20px 0;
+}
+
+.place-card {
+    display: flex;
+    flex-direction: column; /* الصورة فوق والنص تحت */
+    background-color: var(--surface-color);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.place-card img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; /* لمنع الصور من أن تكون عملاقة */
+    object-fit: cover; /* لضمان عدم تشويه الصورة */
+}
+
+.place-info {
+    padding: 20px;
+}
+
+/* تنسيق الصورة الرئيسية للمدينة في الأعلى */
+.main-region-img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 20px 0;
+}

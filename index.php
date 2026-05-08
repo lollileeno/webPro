@@ -12,6 +12,7 @@
             <ul>
                 <li><a href="index.php">الرئيسية</a></li>
                 <li><a href="regions.php">معرض المناطق</a></li>
+               
             </ul>
             <button id="nightModeBtn">الوضع الليلي</button>
         </nav>
