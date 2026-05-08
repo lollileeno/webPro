@@ -1,5 +1,4 @@
 <?php
-// session_start() MUST be the very first line before any HTML
 session_start();
 include '../db.php';
 
@@ -9,20 +8,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    // Using prepared statements to prevent SQL Injection
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE username=? AND password=?");
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        $_SESSION['admin'] = $username;
-        header("Location: dashboard.php");
-        exit(); // Always exit after a header redirect
-    } else {
-        $error_msg = "<p>خطأ في اسم المستخدم أو كلمة المرور</p>";
+    try {
+        $stmt = $conn->prepare("SELECT * FROM admin WHERE username=? AND password=?");
+        $stmt->execute([$username, $password]);
+        $admin = $stmt->fetch();
+        
+        if ($admin) {
+            $_SESSION['admin'] = $admin['username'];
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $error_msg = "<p>خطأ في اسم المستخدم أو كلمة المرور</p>";
+        }
+    } catch (PDOException $e) {
+        $error_msg = "<p>خطأ: " . $e->getMessage() . "</p>";
     }
-    $stmt->close();
 }
 ?>
 <!DOCTYPE html>
@@ -41,9 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="username" name="username" required>
             <label for="password">كلمة المرور:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">دخول</button>
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">دخول</button>
+            </div>
         </form>
-        <?php echo $error_msg; ?>
+        <?php if($error_msg) echo "<div style='color:red;text-align:center;font-weight:bold;margin-top:10px;'>$error_msg</div>"; ?>
         <footer>
             <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
         </footer>
