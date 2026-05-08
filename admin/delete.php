@@ -5,23 +5,27 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 include '../db.php';
+
 if (isset($_GET['id']) && isset($_GET['type'])) {
-    $id = intval($_GET['id']); // Sanitize ID
+    $id = intval($_GET['id']);
     $type = $_GET['type'];
     
-    if ($type == 'region') {
-        $sql = "DELETE FROM regions WHERE id = $id";
-    } else {
-        $sql = "DELETE FROM places WHERE id = $id";
-    }
-    
-    if ($conn->query($sql) === TRUE) {
-      $_SESSION['message'] = "تم حذف المحتوى بنجاح";
-      header("Location: dashboard.php");
-      exit();
-    } else {
-        echo "خطأ: " . $conn->error;
+    try {
+        if ($type == 'region') {
+            $stmt = $conn->prepare("DELETE FROM regions WHERE id = ?");
+        } else {
+            $stmt = $conn->prepare("DELETE FROM places WHERE id = ?");
+        }
+        
+        $stmt->execute([$id]);
+        
+        $_SESSION['message'] = "تم حذف المحتوى بنجاح";
+        header("Location: dashboard.php");
+        exit();
+    } catch (PDOException $e) {
+        // يمكنك توجيه المستخدم لصفحة الداشبورد مع رسالة خطأ أيضاً
+        echo "خطأ أثناء الحذف: " . $e->getMessage();
     }
 }
-$conn->close();
+$conn = null;
 ?>
