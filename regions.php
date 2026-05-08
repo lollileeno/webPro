@@ -12,7 +12,6 @@
             <ul>
                 <li><a href="index.php">الرئيسية</a></li>
                 <li><a href="regions.php">معرض المناطق</a></li>
-               
             </ul>
             <button id="nightModeBtn">الوضع الليلي</button>
         </nav>
@@ -23,26 +22,28 @@
         <div id="gallery">
             <?php
             include 'db.php';
-            $sql = "SELECT * FROM regions";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    echo "<div class='region' data-name='" . $row["name"] . "' >";
-                    echo "<img src='images/" . $row["image"] . "' alt='" . $row["name"] . "'>";
-                    echo "<h3>" . $row["name"] . "</h3>";
-                    echo "<a href='details.php?region_id=" . $row["id"] . "'>عرض التفاصيل</a>";
-                    echo "</div>";
+            try {
+                $stmt = $conn->query("SELECT * FROM regions");
+                $regions = $stmt->fetchAll();
+                if (count($regions) > 0) {
+                    foreach($regions as $row) {
+                        echo "<div class='region' data-name='" . htmlspecialchars($row["name"]) . "' >";
+                        echo "<img src='images/" . htmlspecialchars($row["image"]) . "' alt='" . htmlspecialchars($row["name"]) . "'>";
+                        echo "<h3>" . htmlspecialchars($row["name"]) . "</h3>";
+                        echo "<a href='details.php?region_id=" . $row["id"] . "'>عرض التفاصيل</a>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "لا توجد مناطق";
                 }
-            } else {
-                echo "لا توجد مناطق";
-            }
-            $conn->close();
+            } catch (PDOException $e) {}
+            $conn = null;
             ?>
         </div>
-        <footer>
-            <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
-        </footer>
     </main>
+    <footer>
+        <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
+    </footer>
     <script src="scripts.js"></script>
     <script>
         document.getElementById('filter').addEventListener('input', function() {
