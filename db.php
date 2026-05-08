@@ -1,14 +1,15 @@
 <?php
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$dbname = "saudi_db";
-$socket = "/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock";
+// جلب البيانات من متغيرات بيئة Render
+$servername = getenv('DB_HOST') ?: "localhost";
+$username = getenv('DB_USER') ?: "root";
+$password = getenv('DB_PASS') ?: "";
+$dbname = getenv('DB_NAME') ?: "saudi_db";
 
-// التصحيح هنا: استخدام mysqli بدلاً من myPDO
-$conn = new mysqli($servername, $username, $password, $dbname, 3306, $socket);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("فشل الاتصال بقاعدة البيانات: " . $conn->connect_error);
 }
+// لتجنب مشاكل اللغة العربية في قاعدة البيانات
+$conn->set_charset("utf8mb4");
 ?>
