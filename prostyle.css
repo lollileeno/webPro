@@ -283,3 +283,83 @@ form label {
     border-radius: 15px;
     margin: 20px 0;
 }
+
+
+
+/* --- Alert Pop-up Styling --- */
+.alert-popup {
+    position: fixed; /* يبقى ظاهراً حتى لو نزل المستخدم للأسفل */
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 300px;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px 40px 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #c3e6cb;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    animation: slideDown 0.5s ease-out; /* حركة دخول أنيقة */
+}
+
+/* زر الإغلاق داخل المنبثق */
+.alert-close {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #155724;
+    line-height: 1;
+}
+
+@keyframes slideDown {
+    from { transform: translate(-50%, -100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.hide-popup {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translate(-50%, -30px) !important;
+    transition: all 0.5s ease !important;
+}
+
+
+.form-actions {
+    margin-top: 35px; /* إبعاد الزر عن آخر خانة إدخال بمسافة مريحة */
+    display: flex;
+    justify-content: center; /* توسيط الزر، ويمكن تغييرها إلى flex-end لجعله في اليسار */
+    border-top: 1px solid var(--border-color); /* خط خفيف يفصل بين البيانات وزر الحفظ */
+    padding-top: 20px;
+}
+
+.submit-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 40px; /* تكبير مساحة النقر (Clickable Area) */
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(27, 75, 54, 0.2); /* ظل خفيف بلون الهوية */
+    width: auto; /* منع الزر من التمدد لكامل الشاشة إذا لم ترغب بذلك */
+    min-width: 200px;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px); /* حركة ارتفاع خفيفة عند مرور الفأرة */
+    box-shadow: 0 6px 12px rgba(27, 75, 54, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0); /* تأثير الضغط الواقعي */
+}
