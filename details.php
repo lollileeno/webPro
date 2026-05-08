@@ -23,47 +23,50 @@
         if (isset($_GET['region_id'])) {
             $region_id = intval($_GET['region_id']); 
 
-            // جلب بيانات المنطقة
-            $sql = "SELECT * FROM regions WHERE id = $region_id";
-            $result = $conn->query($sql);
+            try {
+                // جلب المنطقة باستخدام PDO
+                $stmt = $conn->prepare("SELECT * FROM regions WHERE id = ?");
+                $stmt->execute([$region_id]);
+                $region = $stmt->fetch();
 
-            if ($result && $result->num_rows > 0) {
-                $region = $result->fetch_assoc();
-                
-                echo "<h1>" . htmlspecialchars($region["name"]) . "</h1>";
-                echo "<p>" . htmlspecialchars($region["description"]) . "</p>";
-                echo "<img src='images/" . htmlspecialchars($region["image"]) . "' alt='" . htmlspecialchars($region["name"]) . "' class='main-region-img'>";
+                if ($region) {
+                    echo "<h1>" . htmlspecialchars($region["name"]) . "</h1>";
+                    echo "<p>" . htmlspecialchars($region["description"]) . "</p>";
+                    echo "<img src='images/" . htmlspecialchars($region["image"]) . "' alt='" . htmlspecialchars($region["name"]) . "' class='main-region-img'>";
 
-                echo "<h2>الأماكن المهمة</h2>";
+                    echo "<h2>الأماكن المهمة</h2>";
 
-                // تصحيح: تنفيذ استعلام الأماكن أولاً
-                $sql_places = "SELECT * FROM places WHERE region_id = $region_id";
-                $result_places = $conn->query($sql_places);
+                    // جلب الأماكن التابعة للمنطقة
+                    $stmt_places = $conn->prepare("SELECT * FROM places WHERE region_id = ?");
+                    $stmt_places->execute([$region_id]);
+                    $places = $stmt_places->fetchAll();
 
-                echo "<div class='places-list'>"; 
-
-                if ($result_places && $result_places->num_rows > 0) {
-                    while($place = $result_places->fetch_assoc()) {
-                        echo "<div class='place-card'>";
-                        echo "<img src='images/" . htmlspecialchars($place["image"]) . "' alt='" . htmlspecialchars($place["name"]) . "'>";
-                        echo "<div class='place-info'>";
-                        echo "<h3>" . htmlspecialchars($place["name"]) . "</h3>";
-                        echo "<p>" . htmlspecialchars($place["description"]) . "</p>";
-                        echo "</div>";
-                        echo "</div>";
+                    echo "<div class='places-list'>"; 
+                    if (count($places) > 0) {
+                        foreach($places as $place) {
+                            echo "<div class='place-card'>";
+                            echo "<img src='images/" . htmlspecialchars($place["image"]) . "' alt='" . htmlspecialchars($place["name"]) . "'>";
+                            echo "<div class='place-info'>";
+                            echo "<h3>" . htmlspecialchars($place["name"]) . "</h3>";
+                            echo "<p>" . htmlspecialchars($place["description"]) . "</p>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "<p>لا توجد أماكن مضافة لهذه المنطقة.</p>";
                     }
-                } else {
-                    echo "<p>لا توجد أماكن مضافة لهذه المنطقة.</p>";
-                }
-                echo "</div>"; // إغلاق places-list
+                    echo "</div>";
 
-            } else {
-                echo "<p>عذراً، هذه المنطقة غير موجودة.</p>";
+                } else {
+                    echo "<p>عذراً، هذه المنطقة غير موجودة.</p>";
+                }
+            } catch (PDOException $e) {
+                echo "<p>خطأ: " . $e->getMessage() . "</p>";
             }
         } else {
             echo "<p>خطأ: لم يتم تحديد المنطقة.</p>";
         }
-        $conn->close();
+        $conn = null;
         ?>
     </main>
     <footer>
