@@ -18,17 +18,23 @@ include '../db.php';
     <header>
         <nav>
             <a href="add.php">إضافة محتوى</a>
+            <button id="nightModeBtn">الوضع الليلي</button>
             <a href="logout.php">خروج</a>
         </nav>
     </header>
     <main>
         <h1>لوحة التحكم</h1>
-        <?php
-        if (isset($_GET['message'])) {
-            // htmlspecialchars prevents XSS attacks
-            echo "<p style='color: green; font-weight: bold;'>" . htmlspecialchars($_GET['message']) . "</p>";
-        }
-        ?>
+     <?php
+    // التحقق من وجود رسالة في الجلسة (تم ضبطها في add/update/delete.php)
+    if (isset($_SESSION['message'])) {
+        echo '<div class="alert-popup">
+                <span>' . htmlspecialchars($_SESSION['message']) . '</span>
+                <span class="alert-close">&times;</span>
+              </div>';
+        // حذف الرسالة لكي لا تظهر مرة أخرى عند التحديث
+        unset($_SESSION['message']);
+    }
+    ?>
         <h2>المناطق</h2>
         <table>
             <tr>
@@ -44,7 +50,7 @@ include '../db.php';
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
                     echo "<td>" . htmlspecialchars($row["description"]) . "</td>";
-                    echo "<td><a href='update.php?id=" . $row["id"] . "&type=region'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=region' onclick='return confirm(\"هل أنت متأكد؟\")'>حذف</a></td>";
+                    echo "<td><a href='update.php?id=" . $row["id"] . "&type=region'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=region' onclick='return confirm(\"هل أنت متأكد من الحذف؟\")'>حذف</a></td>";
                     echo "</tr>";
                 }
             }
@@ -67,7 +73,7 @@ include '../db.php';
                     echo "<td>" . htmlspecialchars($row["name"]) . "</td>";
                     echo "<td>" . htmlspecialchars($row["region_name"]) . "</td>";
                     echo "<td>" . htmlspecialchars($row["description"]) . "</td>";
-                    echo "<td><a href='update.php?id=" . $row["id"] . "&type=place'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=place' onclick='return confirm(\"هل أنت متأكد؟\")'>حذف</a></td>";
+                    echo "<td><a href='update.php?id=" . $row["id"] . "&type=place'>تحديث</a> | <a href='delete.php?id=" . $row["id"] . "&type=place' onclick='return confirm(\"هل أنت متأكد من الحذف؟\")'>حذف</a></td>";
                     echo "</tr>";
                 }
             }
@@ -77,6 +83,7 @@ include '../db.php';
             <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
         </footer>
     </main>
+    <script src="../scripts.js"></script>
 </body>
 </html>
 <?php $conn->close(); ?>

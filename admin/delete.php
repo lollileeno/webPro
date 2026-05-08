@@ -16,8 +16,9 @@ if (isset($_GET['id']) && isset($_GET['type'])) {
     }
     
     if ($conn->query($sql) === TRUE) {
-        header("Location: dashboard.php?message=" . urlencode("تم حذف المحتوى بنجاح"));
-        exit();
+      $_SESSION['message'] = "تم حذف المحتوى بنجاح";
+      header("Location: dashboard.php");
+      exit();
     } else {
         echo "خطأ: " . $conn->error;
     }
