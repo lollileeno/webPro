@@ -1,7 +1,7 @@
 <?php
 // إعدادات الاتصال بقاعدة بيانات Neon
 $host = "ep-shiny-dew-aq6bb3dn-pooler.c-8.us-east-1.aws.neon.tech"; // استبدله بالرابط الخاص بك
-$dbname = "saudi_db";
+$dbname = "neondb";
 $user = "neondb_owner"; // اسم المستخدم في Neon
 $password = "npg_Sjzkav3Wqu6y"; // كلمة المرور في Neon
 
