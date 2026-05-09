@@ -1,18 +1,24 @@
-# استخدام نسخة PHP الرسمية مع خادم Apache
-FROM php:8.1-apache
+<?php
+// إعدادات الاتصال بقاعدة بيانات Neon (PostgreSQL)
+// يمكنك استبدال هذه القيم بما يعطيك إياه موقع Neon
+$host = "postgresql://neondb_owner:npg_Sjzkav3Wqu6y@ep-shiny-dew-aq6bb3dn-pooler.c-8.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"; // من رابط Neon
+$dbname = "saudi_db";
+$user = "your_neon_user";
+$password = "your_neon_password";
 
-# تثبيت المكتبات اللازمة لـ PostgreSQL
-RUN apt-get update && apt-get install -y libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql
+// إعداد الـ DSN الخاص بـ PostgreSQL
+$dsn = "pgsql:host=$host;port=5432;dbname=$dbname;sslmode=require";
 
-# تفعيل mod_rewrite في أباتشي
-RUN a2enmod rewrite
+try {
+    // إنشاء الاتصال باستخدام PDO
+    $conn = new PDO($dsn, $user, $password);
+    
+    // إعداد PDO لإظهار الأخطاء بشكل استثناءات (Exceptions) للحماية وتسهيل التتبع
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // جلب البيانات على شكل مصفوفة ترابطية افتراضياً
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-# نسخ ملفات المشروع إلى مجلد السيرفر
-COPY . /var/www/html/
-
-# إعطاء الصلاحيات لمجلد الصور
-RUN chown -R www-data:www-data /var/www/html/images
-RUN chmod -R 755 /var/www/html/images
-
-EXPOSE 80
+} catch (PDOException $e) {
+    die("فشل الاتصال بقاعدة بيانات Neon: " . $e->getMessage());
+}
+?>
