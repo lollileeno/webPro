@@ -478,3 +478,40 @@ body.night .info-cards .card h3 {
     color: #e0e0e0;
     border-color: #e0e0e0;
 }
+
+/* --- تنسيقات شريط البحث والترتيب --- */
+.filter-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.filter-controls input[type="text"] {
+    flex: 2; /* يأخذ مساحة أكبر من القائمة المنسدلة */
+    margin-bottom: 0; 
+}
+
+.filter-controls select {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 16px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    outline: none;
+    cursor: pointer;
+}
+
+.filter-controls select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(27, 75, 54, 0.2);
+}
+
+/* لجعلها متناسقة في شاشات الجوال */
+@media (max-width: 600px) {
+    .filter-controls {
+        flex-direction: column;
+    }
+}
