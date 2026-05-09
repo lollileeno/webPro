@@ -24,7 +24,7 @@
             $region_id = intval($_GET['region_id']); 
 
             try {
-                // جلب المنطقة باستخدام PDO
+              
                 $stmt = $conn->prepare("SELECT * FROM regions WHERE id = ?");
                 $stmt->execute([$region_id]);
                 $region = $stmt->fetch();
@@ -36,7 +36,7 @@
 
                     echo "<h2>الأماكن المهمة</h2>";
 
-                    // جلب الأماكن التابعة للمنطقة
+                   
                     $stmt_places = $conn->prepare("SELECT * FROM places WHERE region_id = ?");
                     $stmt_places->execute([$region_id]);
                     $places = $stmt_places->fetchAll();
@@ -73,7 +73,7 @@
         </div>
     </main>
     <footer>
-        <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
+          <p>جميع الحقوق محفوظة &copy; اكتشف السعودية</p>
     </footer>
     <script src="scripts.js"></script>
 </body>

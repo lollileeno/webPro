@@ -1,5 +1,5 @@
 <?php
-// سحب البيانات من إعدادات السيرفر (Render) بدلاً من كتابتها هنا
+
 $host = getenv('DB_HOST') ?: "localhost";
 $dbname = getenv('DB_NAME') ?: "neon_db";
 $user = getenv('DB_USER') ?: "neondb_owner";

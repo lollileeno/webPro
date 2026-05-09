@@ -1,9 +1,9 @@
-/* Import Google Font for Arabic Typography */
+
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
 
-/* --- CSS Variables for Easy Theming (Light & Dark Mode) --- */
+
 :root {
-    --primary-color: #1b4b36; /* Saudi Dark Green */
+    --primary-color: #1b4b36; 
     --primary-hover: #143828;
     --bg-color: #f4f7f6;
     --surface-color: #ffffff;
@@ -14,7 +14,7 @@
 }
 
 body.night {
-    --primary-color: #113324; /* Darker green for night header */
+    --primary-color: #113324; 
     --bg-color: #121212;
     --surface-color: #1e1e1e;
     --text-color: #e0e0e0;
@@ -23,14 +23,14 @@ body.night {
     --shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* --- Global Styles --- */
+
 body {
     font-family: 'Tajawal', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    direction: rtl; /* Ensure right-to-left layout for Arabic */
+    direction: rtl; 
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -40,7 +40,7 @@ main, .container {
     padding: 20px;
 }
 
-/* --- Navigation & Header --- */
+
 header {
     background-color: var(--primary-color);
     color: white;
@@ -80,7 +80,7 @@ nav a:hover {
     opacity: 0.8;
 }
 
-/* --- Buttons --- */
+
 button, .btn {
     background-color: var(--primary-color);
     color: white;
@@ -102,7 +102,7 @@ button:active, .btn:active {
     transform: scale(0.98);
 }
 
-/* --- Home Page Hero & Cards --- */
+
 #intro, .hero-section {
     background-color: var(--primary-color);
     color: white;
@@ -113,7 +113,7 @@ button:active, .btn:active {
     box-shadow: var(--shadow);
 }
 
-/* --- Gallery Grid Layout --- */
+
 #gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -166,7 +166,6 @@ button:active, .btn:active {
     font-weight: bold;
 }
 
-/* --- Search / Filter Input --- */
 #filter, input[type="text"], input[type="password"] {
     width: 100%;
     padding: 12px;
@@ -186,7 +185,6 @@ button:active, .btn:active {
     box-shadow: 0 0 0 2px rgba(27, 75, 54, 0.2);
 }
 
-/* --- Admin Dashboard Tables --- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -214,7 +212,7 @@ body.night th {
     color: var(--text-color);
 }
 
-/* --- Details Page Layout --- */
+
 .place {
     background-color: var(--surface-color);
     border-radius: 12px;
@@ -224,7 +222,7 @@ body.night th {
     border: 1px solid var(--border-color);
 }
 
-/* --- Login Form --- */
+
 form {
     background-color: var(--surface-color);
     padding: 30px;
@@ -241,22 +239,19 @@ form label {
     display: block;
 }
 
-/* الصورة الرئيسية في الأعلى: نحدد لها ارتفاعاً لكي لا تكون ضخمة */
 
-
-/* حاوية الأماكن بنظام Flexbox */
 .places-list {
     display: flex;
-    flex-direction: column; /* الترتيب تحت بعض */
+    flex-direction: column; 
     gap: 30px;
-    max-width: 900px; /* جعلها داخل حاوية محددة العرض */
-    margin: 0 auto; /* توسيط الحاوية */
+    max-width: 900px; 
+    margin: 0 auto; 
     padding: 20px 0;
 }
 
 .place-card {
     display: flex;
-    flex-direction: column; /* الصورة فوق والنص تحت */
+    flex-direction: column; 
     background-color: var(--surface-color);
     border-radius: 15px;
     overflow: hidden;
@@ -267,15 +262,15 @@ form label {
 .place-card img {
     width: 100%;
     height: auto;
-    max-height: 400px; /* لمنع الصور من أن تكون عملاقة */
-    object-fit: cover; /* لضمان عدم تشويه الصورة */
+    max-height: 400px; 
+    object-fit: cover; 
 }
 
 .place-info {
     padding: 20px;
 }
 
-/* تنسيق الصورة الرئيسية للمدينة في الأعلى */
+
 .main-region-img {
     width: 100%;
     max-height: 450px;
@@ -286,9 +281,9 @@ form label {
 
 
 
-/* --- Alert Pop-up Styling --- */
+
 .alert-popup {
-    position: fixed; /* يبقى ظاهراً حتى لو نزل المستخدم للأسفل */
+    position: fixed; 
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -304,10 +299,9 @@ form label {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    animation: slideDown 0.5s ease-out; /* حركة دخول أنيقة */
+    animation: slideDown 0.5s ease-out; 
 }
 
-/* زر الإغلاق داخل المنبثق */
 .alert-close {
     position: absolute;
     right: 10px;
@@ -332,51 +326,51 @@ form label {
 
 
 .form-actions {
-    margin-top: 35px; /* إبعاد الزر عن آخر خانة إدخال بمسافة مريحة */
+    margin-top: 35px; 
     display: flex;
-    justify-content: center; /* توسيط الزر، ويمكن تغييرها إلى flex-end لجعله في اليسار */
-    border-top: 1px solid var(--border-color); /* خط خفيف يفصل بين البيانات وزر الحفظ */
+    justify-content: center; 
+    border-top: 1px solid var(--border-color); 
     padding-top: 20px;
 }
 
 .submit-btn {
     background-color: var(--primary-color);
     color: white;
-    padding: 12px 40px; /* تكبير مساحة النقر (Clickable Area) */
+    padding: 12px 40px; 
     font-size: 16px;
     font-weight: bold;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(27, 75, 54, 0.2); /* ظل خفيف بلون الهوية */
-    width: auto; /* منع الزر من التمدد لكامل الشاشة إذا لم ترغب بذلك */
+    box-shadow: 0 4px 6px rgba(27, 75, 54, 0.2); 
+    width: auto; 
     min-width: 200px;
 }
 
 .submit-btn:hover {
     background-color: var(--primary-hover);
-    transform: translateY(-2px); /* حركة ارتفاع خفيفة عند مرور الفأرة */
+    transform: translateY(-2px); 
     box-shadow: 0 6px 12px rgba(27, 75, 54, 0.3);
 }
 
 .submit-btn:active {
-    transform: translateY(0); /* تأثير الضغط الواقعي */
+    transform: translateY(0); 
 }
 
 #BackToRegion a {
-    text-decoration: none; /* هذه القاعدة هي التي تزيل الخط السفلي من الرابط */
-    color: white; /* لون النص الأساسي */
-    transition: background-color 0.3s ease, color 0.3s ease; /* لإضافة تأثير انتقال ناعم عند تغير اللون */
+    text-decoration: none; 
+    color: white; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 #BackToRegion a:hover {
-    background-color: #0d2a1e; /* تغيير لون خلفية الزر إلى أخضر داكن جداً */
-    color: #ffd700; /* تغيير لون النص */
-    text-decoration: none; /* للتأكد من عدم ظهور الخط السفلي مجدداً عند التمرير */
+    background-color: #0d2a1e; 
+    color: #ffd700;
+    text-decoration: none; 
 }
 
-/* تنسيق الزر التفاعلي في الصفحة الرئيسية */
+
 .interactive-btn {
     display: inline-block;
     font-size: 18px;
@@ -387,13 +381,13 @@ form label {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     
-    /* التعديلات الجديدة للألوان */
-    background-color: #ffffff !important; /* خلفية بيضاء */
-    color: var(--primary-color) !important; /* نص باللون الأخضر الداكن */
+   
+    background-color: #ffffff !important;
+    color: var(--primary-color) !important; 
     font-weight: bold;
 }
 
-/* تأثير التمرير (Hover) للزر */
+
 .interactive-btn:hover {
     transform: translateY(-5px) scale(1.05); 
     box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
@@ -402,17 +396,17 @@ form label {
     color: #ffd700 !important; 
 }
 
-/* تنسيق صورة الصفحة الرئيسية */
+
 .hero-img {
-    width: 100%; /* يجعل الصورة تأخذ عرض الصفحة بالكامل */
-    max-height: 450px; /* يحدد أقصى ارتفاع للصورة (يمكنك تقليل الرقم إذا أردتها أصغر) */
-    object-fit: cover; /* يحافظ على جودة الصورة وتناسقها بدون تمطيط */
-    border-radius: 12px; /* يضيف حواف دائرية ناعمة تطابق تصميم موقعكم */
+    width: 100%; 
+    max-height: 450px; 
+    object-fit: cover; 
+    border-radius: 12px; 
     margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* إضافة ظل خفيف لجمالية أكثر */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
 }
 
-/* --- تنسيقات أقسام الصفحة الرئيسية الجديدة --- */
+
 
 .about-saudi {
     background-color: var(--surface-color);
@@ -479,7 +473,7 @@ body.night .info-cards .card h3 {
     border-color: #e0e0e0;
 }
 
-/* --- تنسيقات شريط البحث والترتيب --- */
+
 .filter-controls {
     display: flex;
     gap: 15px;
@@ -487,7 +481,7 @@ body.night .info-cards .card h3 {
 }
 
 .filter-controls input[type="text"] {
-    flex: 2; /* يأخذ مساحة أكبر من القائمة المنسدلة */
+    flex: 2; 
     margin-bottom: 0; 
 }
 
@@ -509,7 +503,6 @@ body.night .info-cards .card h3 {
     box-shadow: 0 0 0 2px rgba(27, 75, 54, 0.2);
 }
 
-/* لجعلها متناسقة في شاشات الجوال */
 @media (max-width: 600px) {
     .filter-controls {
         flex-direction: column;

@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // ==========================================
-    // PHASE 1: NIGHT MODE LOGIC
-    // ==========================================
+ 
     const nightModeBtn = document.getElementById('nightModeBtn');
     
     const updateBtnText = () => {
@@ -29,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ==========================================
-    // PHASE 2: ADMIN ALERT POP-UPS
-    // ==========================================
+
     const alertPopup = document.querySelector('.alert-popup');
     
     if (alertPopup) {
@@ -51,20 +47,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // ==========================================
-    // PHASE 3: HOME PAGE "SHOW MORE / SHOW LESS"
-    // ==========================================
+
     const toggleTextBtn = document.getElementById('toggleTextBtn');
     const moreText = document.getElementById('moreText');
 
     if (toggleTextBtn && moreText) {
         toggleTextBtn.addEventListener('click', function() {
             if (moreText.style.display === 'none') {
-                // Show the text and dynamically change the button label
+              
                 moreText.style.display = 'block';
                 toggleTextBtn.innerText = 'عرض أقل';
             } else {
-                // Hide the text and dynamically change the button label back
+              
                 moreText.style.display = 'none';
                 toggleTextBtn.innerText = 'عرض المزيد';
             }
@@ -73,18 +67,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 }); 
 
-// ==========================================
-    // PHASE 4: REGIONS FILTERING AND SORTING
-    // ==========================================
+
     const searchInput = document.getElementById('searchInput');
     const sortSelect = document.getElementById('sortSelect');
     const gallery = document.getElementById('gallery');
 
     if (gallery && searchInput && sortSelect) {
-        // 1. نحفظ النسخة الأصلية من العناصر لنتمكن من العودة للترتيب الافتراضي
+      
         const originalRegions = Array.from(gallery.querySelectorAll('.region'));
 
-        // دالة إزالة "ال" التعريف
+     
         const removeAl = (str) => {
             let s = str.trim();
             if (s.startsWith('ال')) {
@@ -98,17 +90,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const sortOrder = sortSelect.value;
             const cleanQuery = removeAl(query);
 
-            // 2. نبدأ دايماً من النسخة الأصلية لضمان عدم تداخل الترتيبات السابقة
+           
             let filteredRegions = [...originalRegions];
 
-            // 3. التصفية (البحث) 
+           
             filteredRegions = filteredRegions.filter(region => {
                 const name = region.getAttribute('data-name');
                 const cleanName = removeAl(name);
                 return name.includes(query) || cleanName.includes(cleanQuery);
             });
 
-            // 4. الترتيب الأبجدي الذكي (يتجاهل "ال" في المقارنة)
+        
             if (sortOrder === 'asc') {
                 filteredRegions.sort((a, b) => {
                     const nameA = removeAl(a.getAttribute('data-name'));
@@ -122,9 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     return nameB.localeCompare(nameA, 'ar');
                 });
             }
-            // ملاحظة: إذا كان sortOrder هو 'default'، فلن يدخل الشرطين وسيبقى على الترتيب الأصلي
-
-            // 5. مسح المعرض وإعادة رسم البطاقات
+          
             gallery.innerHTML = '';
             if (filteredRegions.length > 0) {
                 filteredRegions.forEach(region => gallery.appendChild(region));
@@ -133,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        // تشغيل الدالة عند الكتابة في مربع البحث أو عند تغيير الترتيب
+      
         searchInput.addEventListener('input', updateGallery);
         sortSelect.addEventListener('change', updateGallery);
     }
