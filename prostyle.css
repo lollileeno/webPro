@@ -398,13 +398,13 @@ form label {
     transform: translateY(-5px) scale(1.05); 
     box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
     
-    background-color: #f4f7f6 !important; /* لون رمادي فاتح جداً عند التمرير */
-    color: var(--primary-hover) !important; /* نص بلون أخضر أغمق */
+    background-color: #0d2a1e !important; 
+    color: #ffd700 !important; 
 }
 
 /* تنسيق صورة الصفحة الرئيسية */
 .hero-img {
-    width: 100%; /* يجعل الصورة تأخذ عرض الصفحة بالكامل */
+    width: 25%; /* يجعل الصورة تأخذ عرض الصفحة بالكامل */
     max-height: 450px; /* يحدد أقصى ارتفاع للصورة (يمكنك تقليل الرقم إذا أردتها أصغر) */
     object-fit: cover; /* يحافظ على جودة الصورة وتناسقها بدون تمطيط */
     border-radius: 12px; /* يضيف حواف دائرية ناعمة تطابق تصميم موقعكم */
