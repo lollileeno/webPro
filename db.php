@@ -1,9 +1,9 @@
 <?php
 // إعدادات الاتصال بقاعدة بيانات Neon
-$host = "ep-cool-snowflake-123456.eu-central-1.aws.neon.tech"; // استبدله بالرابط الخاص بك
+$host = "ep-shiny-dew-aq6bb3dn-pooler.c-8.us-east-1.aws.neon.tech"; // استبدله بالرابط الخاص بك
 $dbname = "saudi_db";
-$user = "your_neon_user"; // اسم المستخدم في Neon
-$password = "your_neon_password"; // كلمة المرور في Neon
+$user = "neondb_owner"; // اسم المستخدم في Neon
+$password = "npg_Sjzkav3Wqu6y"; // كلمة المرور في Neon
 
 // إعداد رابط DSN الخاص بـ PostgreSQL
 $dsn = "pgsql:host=$host;port=5432;dbname=$dbname;sslmode=require";
