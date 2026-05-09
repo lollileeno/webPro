@@ -23,7 +23,6 @@ if (isset($_GET['id']) && isset($_GET['type'])) {
         header("Location: dashboard.php");
         exit();
     } catch (PDOException $e) {
-        // يمكنك توجيه المستخدم لصفحة الداشبورد مع رسالة خطأ أيضاً
         echo "خطأ أثناء الحذف: " . $e->getMessage();
     }
 }
