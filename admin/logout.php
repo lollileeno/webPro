@@ -1,13 +1,10 @@
 <?php
-session_start(); // البدء بالجلسة
+session_start(); 
 
-// 1. مسح جميع متغيرات الجلسة من الذاكرة
 $_SESSION = array(); 
 
-// 2. تدمير الجلسة تماماً من السيرفر
 session_destroy(); 
 
-// 3. توجيه المستخدم لصفحة الدخول
 header("Location: login.php");
-exit(); // التأكد من توقف الاسكريبت هنا
+exit(); 
 ?>
