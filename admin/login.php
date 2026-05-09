@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
         <?php if($error_msg) echo "<div style='color:red;text-align:center;font-weight:bold;margin-top:10px;'>$error_msg</div>"; ?>
         <footer>
-            <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
+            <p>جميع الحقوق محفوظة &copy; اكتشف السعودية</p>
         </footer>
     </main>
 </body>
