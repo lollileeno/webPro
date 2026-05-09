@@ -18,7 +18,16 @@
     </header>
     <main>
         <h1>معرض المناطق</h1>
-        <input type="text" id="filter" placeholder="ابحث عن منطقة...">
+        
+        <div class="filter-controls">
+            <input type="text" id="searchInput" placeholder="ابحث عن منطقة... (مثال: رياض أو الرياض)">
+            <select id="sortSelect">
+                <option value="default">الترتيب الافتراضي</option>
+                <option value="asc">أبجدي (أ - ي)</option>
+                <option value="desc">أبجدي (ي - أ)</option>
+            </select>
+        </div>
+
         <div id="gallery">
             <?php
             include 'db.php';
@@ -34,7 +43,7 @@
                         echo "</div>";
                     }
                 } else {
-                    echo "لا توجد مناطق";
+                    echo "<p style='width: 100%; text-align: center;'>لا توجد مناطق مضافة حتى الآن.</p>";
                 }
             } catch (PDOException $e) {}
             $conn = null;
@@ -45,19 +54,5 @@
         <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
     </footer>
     <script src="scripts.js"></script>
-    <script>
-        document.getElementById('filter').addEventListener('input', function() {
-            const filter = this.value.toLowerCase();
-            const regions = document.querySelectorAll('.region');
-            regions.forEach(region => {
-                const name = region.getAttribute('data-name').toLowerCase();
-                if (name.includes(filter)) {
-                    region.style.display = 'block';
-                } else {
-                    region.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
