@@ -64,10 +64,13 @@
                 echo "<p>خطأ: " . $e->getMessage() . "</p>";
             }
         } else {
-            echo "<p>خطأ: لم يتم تحديد المنطقة.</p>";
+            echo "<p>خطأ: لم يتم تحديد المنطقة.</p>";  
         }
         $conn = null;
         ?>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="regions.php" class="btn">العودة لمعرض المناطق</a>
+        </div>
     </main>
     <footer>
         <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
