@@ -375,3 +375,20 @@ form label {
     color: #ffd700; /* تغيير لون النص */
     text-decoration: none; /* للتأكد من عدم ظهور الخط السفلي مجدداً عند التمرير */
 }
+
+.interactive-btn {
+    display: inline-block;
+    font-size: 18px;
+    padding: 12px 35px;
+    margin-top: 15px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* حركة ناعمة جداً */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.interactive-btn:hover {
+    transform: translateY(-5px) scale(1.05); /* يرتفع للأعلى ويكبر قليلاً */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* زيادة الظل لإعطاء إحساس بالعمق */
+    background-color: #0d2a1e; /* لون أخضر داكن */
+    color: #ffd700; /* تغيير النص للذهبي */
+}
