@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 2. نبدأ دايماً من النسخة الأصلية لضمان عدم تداخل الترتيبات السابقة
             let filteredRegions = [...originalRegions];
 
-            // 3. التصفية (البحث) [cite: 26]
+            // 3. التصفية (البحث) 
             filteredRegions = filteredRegions.filter(region => {
                 const name = region.getAttribute('data-name');
                 const cleanName = removeAl(name);
