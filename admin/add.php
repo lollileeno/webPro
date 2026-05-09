@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </main>
     <footer>
-        <p>جميع الحقوق محفوظة © اكتشف السعودية</p>
+        <p>جميع الحقوق محفوظة &copy; اكتشف السعودية</p>
     </footer>
     <script src="../scripts.js"></script>
 </body>
