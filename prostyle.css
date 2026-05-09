@@ -363,3 +363,15 @@ form label {
 .submit-btn:active {
     transform: translateY(0); /* تأثير الضغط الواقعي */
 }
+
+#BackToRegion a {
+    text-decoration: none; /* هذه القاعدة هي التي تزيل الخط السفلي من الرابط */
+    color: white; /* لون النص الأساسي */
+    transition: background-color 0.3s ease, color 0.3s ease; /* لإضافة تأثير انتقال ناعم عند تغير اللون */
+}
+
+#BackToRegion a:hover {
+    background-color: #0d2a1e; /* تغيير لون خلفية الزر إلى أخضر داكن جداً */
+    color: #ffd700; /* تغيير لون النص */
+    text-decoration: none; /* للتأكد من عدم ظهور الخط السفلي مجدداً عند التمرير */
+}
