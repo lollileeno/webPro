@@ -1,8 +1,8 @@
 <?php
 // سحب البيانات من إعدادات السيرفر (Render) بدلاً من كتابتها هنا
 $host = getenv('DB_HOST') ?: "localhost";
-$dbname = getenv('DB_NAME') ?: "saudi_db";
-$user = getenv('DB_USER') ?: "root";
+$dbname = getenv('DB_NAME') ?: "neon_db";
+$user = getenv('DB_USER') ?: "neondb_owner";
 $password = getenv('DB_PASS') ?: "";
 
 $dsn = "pgsql:host=$host;port=5432;dbname=$dbname;sslmode=require";
