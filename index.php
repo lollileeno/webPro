@@ -21,7 +21,7 @@
         <section id="intro">
             <h1>مرحبا بك في موقع اكتشف السعودية</h1>
             <p>هذا الموقع مخصص للتعريف بالمملكة العربية السعودية، مناطقها، ثقافتها، معالمها التاريخية، وأماكنها المهمة.</p>
-           <img src="images/saudi.jpg" alt="السعودية" class="hero-img">
+           <img src="images/saudi.webp" alt="السعودية" class="hero-img">
 
             <br>
             <a href="regions.php" class="btn interactive-btn">!ابدأ الاستكشاف</a>
