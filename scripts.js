@@ -81,14 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('gallery');
 
     if (gallery && searchInput && sortSelect) {
-        // نأخذ جميع المناطق ونحفظها في مصفوفة (Array) لنتمكن من ترتيبها
-        const regions = Array.from(gallery.querySelectorAll('.region'));
+        // 1. نحفظ النسخة الأصلية من العناصر لنتمكن من العودة للترتيب الافتراضي
+        const originalRegions = Array.from(gallery.querySelectorAll('.region'));
 
-        // دالة ذكية لإزالة "ال" التعريف من بداية الكلمة لتسهيل البحث
+        // دالة إزالة "ال" التعريف
         const removeAl = (str) => {
             let s = str.trim();
             if (s.startsWith('ال')) {
-                return s.substring(2); // يقتطع أول حرفين
+                return s.substring(2);
             }
             return s;
         };
@@ -96,27 +96,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const updateGallery = () => {
             const query = searchInput.value.trim().toLowerCase();
             const sortOrder = sortSelect.value;
-            const cleanQuery = removeAl(query); // استعلام البحث بدون "ال"
+            const cleanQuery = removeAl(query);
 
-            // 1. التصفية (البحث)
-            let filteredRegions = regions.filter(region => {
+            // 2. نبدأ دايماً من النسخة الأصلية لضمان عدم تداخل الترتيبات السابقة
+            let filteredRegions = [...originalRegions];
+
+            // 3. التصفية (البحث) [cite: 26]
+            filteredRegions = filteredRegions.filter(region => {
                 const name = region.getAttribute('data-name');
-                const cleanName = removeAl(name); // اسم المنطقة بدون "ال"
-
-                // نتحقق إذا كان الاسم يحتوي على الكلمة المبحوث عنها (سواء بـ "ال" أو بدونها)
+                const cleanName = removeAl(name);
                 return name.includes(query) || cleanName.includes(cleanQuery);
             });
 
-            // 2. الترتيب الأبجدي
+            // 4. الترتيب الأبجدي الذكي (يتجاهل "ال" في المقارنة)
             if (sortOrder === 'asc') {
-                // ترتيب من أ إلى ي (استخدام localeCompare ليدعم اللغة العربية بشكل صحيح)
-                filteredRegions.sort((a, b) => a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'), 'ar'));
+                filteredRegions.sort((a, b) => {
+                    const nameA = removeAl(a.getAttribute('data-name'));
+                    const nameB = removeAl(b.getAttribute('data-name'));
+                    return nameA.localeCompare(nameB, 'ar');
+                });
             } else if (sortOrder === 'desc') {
-                // ترتيب من ي إلى أ
-                filteredRegions.sort((a, b) => b.getAttribute('data-name').localeCompare(a.getAttribute('data-name'), 'ar'));
+                filteredRegions.sort((a, b) => {
+                    const nameA = removeAl(a.getAttribute('data-name'));
+                    const nameB = removeAl(b.getAttribute('data-name'));
+                    return nameB.localeCompare(nameA, 'ar');
+                });
             }
+            // ملاحظة: إذا كان sortOrder هو 'default'، فلن يدخل الشرطين وسيبقى على الترتيب الأصلي
 
-            // 3. مسح المعرض وإعادة رسم البطاقات المفلترة والمرتبة
+            // 5. مسح المعرض وإعادة رسم البطاقات
             gallery.innerHTML = '';
             if (filteredRegions.length > 0) {
                 filteredRegions.forEach(region => gallery.appendChild(region));
