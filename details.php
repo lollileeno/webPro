@@ -68,7 +68,7 @@
         }
         $conn = null;
         ?>
-        <div style="text-align: center; margin-top: 40px;">
+        <div id="BackToRegion">
             <a href="regions.php" class="btn">العودة لمعرض المناطق</a>
         </div>
     </main>
