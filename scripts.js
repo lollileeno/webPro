@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- الجزء الخاص بالوضع الليلي ---
+
+    // ==========================================
+    // PHASE 1: NIGHT MODE LOGIC
+    // ==========================================
     const nightModeBtn = document.getElementById('nightModeBtn');
     
-    // دالة لتحديث نص الزر بناءً على الوضع الحالي
     const updateBtnText = () => {
         if (nightModeBtn) {
             if (document.body.classList.contains('night')) {
@@ -13,44 +15,60 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // التحقق من الوضع المحفوظ في المتصفح عند فتح الصفحة
     if (localStorage.getItem('nightMode') === 'true') {
         document.body.classList.add('night');
     }
     
-    // استدعاء الدالة لضبط النص الصحيح أول ما تفتح الصفحة
     updateBtnText();
 
     if (nightModeBtn) {
         nightModeBtn.addEventListener('click', function() {
             document.body.classList.toggle('night');
             localStorage.setItem('nightMode', document.body.classList.contains('night'));
-            
-            // تحديث نص الزر فوراً بعد الضغط
             updateBtnText();
         });
     }
 
-    // --- الجزء الخاص بالرسائل (Pop-up) ---
+    // ==========================================
+    // PHASE 2: ADMIN ALERT POP-UPS
+    // ==========================================
     const alertPopup = document.querySelector('.alert-popup');
     
     if (alertPopup) {
-        // دالة الإغلاق الموحدة
         const closeAlert = () => {
-            alertPopup.classList.add('hide-popup'); // إضافة كلاس الاختفاء
-            setTimeout(() => { alertPopup.remove(); }, 500); // حذفه بعد الأنيميشن
+            alertPopup.classList.add('hide-popup'); 
+            setTimeout(() => { alertPopup.remove(); }, 500); 
         };
 
-        // 1. المؤقت (Timer): يغلق تلقائياً بعد 4 ثوانٍ
         const timer = setTimeout(closeAlert, 4000);
 
-        // 2. الإغلاق اليدوي: عند الضغط على X
         const closeBtn = alertPopup.querySelector('.alert-close');
         if (closeBtn) {
             closeBtn.onclick = function() {
-                clearTimeout(timer); // إيقاف المؤقت إذا أغلقها المستخدم يدوياً
+                clearTimeout(timer); 
                 closeAlert();
             };
         }
     }
-});
+
+    // ==========================================
+    // PHASE 3: HOME PAGE "SHOW MORE / SHOW LESS"
+    // ==========================================
+    const toggleTextBtn = document.getElementById('toggleTextBtn');
+    const moreText = document.getElementById('moreText');
+
+    if (toggleTextBtn && moreText) {
+        toggleTextBtn.addEventListener('click', function() {
+            if (moreText.style.display === 'none') {
+                // Show the text and dynamically change the button label
+                moreText.style.display = 'block';
+                toggleTextBtn.innerText = 'عرض أقل';
+            } else {
+                // Hide the text and dynamically change the button label back
+                moreText.style.display = 'none';
+                toggleTextBtn.innerText = 'عرض المزيد';
+            }
+        });
+    }
+
+}); 
