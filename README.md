@@ -63,3 +63,27 @@ If you wish to run this project locally, you can use Docker.
    ```bash
    git clone [https://github.com/yourusername/discover-saudi.git](https://github.com/yourusername/discover-saudi.git)
    cd discover-saudi
+   ```
+
+2. Build the Docker image:
+   ```bash
+   docker build -t discover-saudi .
+   ```
+
+3. Run the container:
+   ```bash
+   docker run -d -p 8080:80 discover-saudi
+   ```
+
+4. Access the application at `http://localhost:8080`
+
+### Environment Variables
+Ensure you configure your database connection by setting the following environment variables (or modifying `db.php` for local testing):
+* `DB_HOST`
+* `DB_NAME`
+* `DB_USER`
+* `DB_PASS`
+
+---
+
+*Designed and developed as a capstone software engineering project.*
