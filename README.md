@@ -83,7 +83,3 @@ Ensure you configure your database connection by setting the following environme
 * `DB_NAME`
 * `DB_USER`
 * `DB_PASS`
-
----
-
-*Designed and developed as a capstone software engineering project.*
